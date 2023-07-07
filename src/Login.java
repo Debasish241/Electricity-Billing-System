@@ -82,18 +82,29 @@ public class Login extends JFrame implements ActionListener {
 public void actionPerformed (ActionEvent ae){
         if(ae.getSource()==login){
             String susername=username.getText();
-            String spassword=username.getText();
+            String spassword=password.getText();
             String user = loginin.getSelectedItem();
 
             try{
-                Conn c=new Conn();
+//                Conn c=new Conn();
                 Connection connection =Conn.establishConnection();
-                String query = "select * from login where username = '"+susername+"' and password = '"+spassword+"' and user = '"+user+"'";
-                Statement s=connection.createStatement();
-                ResultSet rs=s.executeQuery(query);
+                String query = "select * from login where username = '"+susername+"' and password = '"+spassword+"' and userN = '"+user+"'";
+                Statement st=connection.createStatement();
+                ResultSet rs=st.executeQuery(query);
+//                Statement s=connection.createStatement();
+//                s.executeUpdate(query);
+//                System.out.println("rs.next="+rs.next());
                 if(rs.next()){
-                    setVisible(false);
-                    new Project();
+                    String meter = rs.getString("meter_no");
+//                    System.out.println(rs.getString("susername"));
+//                    System.out.println(rs.getString("spassword"));
+                        if(spassword.equals(rs.getString("password"))) {
+                            setVisible(false);
+                            new Project(user,meter);
+                        }
+                    connection.close();
+//                    setVisible(false);
+//                    new Project();
                 }else{
                     JOptionPane.showMessageDialog(null,"Invalid Login");
                     username.setText("");

@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class Project extends JFrame {
-    Project(){
+public class Project extends JFrame implements ActionListener {
+    String atype,meter;
+    Project(String atype,String meter){
+        this.atype=atype;
+        this.meter=meter;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         ImageIcon I1=new ImageIcon(ClassLoader.getSystemResource("icon/elect1.jpg"));
@@ -18,9 +22,9 @@ public class Project extends JFrame {
 
         JMenu master =new JMenu("Master");
         master.setForeground(Color.BLUE);
-        mb.add(master);
 
-        JMenuItem newcustomer = new JMenuItem("new Customer");
+
+        JMenuItem newcustomer = new JMenuItem("New Customer");
         newcustomer.setFont(new Font("monospaced",Font.PLAIN,12));
         newcustomer.setBackground(Color.WHITE);
         ImageIcon Icon1=new ImageIcon(ClassLoader.getSystemResource("icon/icon1.png"));
@@ -28,38 +32,42 @@ public class Project extends JFrame {
         newcustomer.setIcon(new ImageIcon(image1));
         newcustomer.setMnemonic('D');
         newcustomer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
+        newcustomer.addActionListener(this);
         master.add(newcustomer);
 
 
-        JMenuItem customerdetails = new JMenuItem("new Customer");
+        JMenuItem customerdetails = new JMenuItem("Customer Details");
         customerdetails.setFont(new Font("monospaced",Font.PLAIN,12));
         customerdetails.setBackground(Color.WHITE);
         ImageIcon Icon2=new ImageIcon(ClassLoader.getSystemResource("icon/icon2.png"));
         Image image2=Icon2.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         customerdetails.setIcon(new ImageIcon(image2));
         customerdetails.setMnemonic('M');
+        customerdetails.addActionListener(this);
         customerdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
         master.add(customerdetails);
 
 
-        JMenuItem depositdetails = new JMenuItem("new Customer");
+        JMenuItem depositdetails = new JMenuItem("Deposit Details");
         depositdetails.setFont(new Font("monospaced",Font.PLAIN,12));
         depositdetails.setBackground(Color.WHITE);
         ImageIcon Icon3=new ImageIcon(ClassLoader.getSystemResource("icon/icon3.png"));
         Image image3=Icon3.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         depositdetails.setIcon(new ImageIcon(image3));
         depositdetails.setMnemonic('N');
+        depositdetails.addActionListener(this);
         depositdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         master.add(depositdetails);
 
 
-        JMenuItem calculatebill = new JMenuItem("new Customer");
+        JMenuItem calculatebill = new JMenuItem("Calculate Bill");
         calculatebill.setFont(new Font("monospaced",Font.PLAIN,12));
         calculatebill.setBackground(Color.WHITE);
         ImageIcon Icon4=new ImageIcon(ClassLoader.getSystemResource("icon/icon4.png"));
         Image image4=Icon4.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         calculatebill.setIcon(new ImageIcon(image4));
         calculatebill.setMnemonic('B');
+        calculatebill.addActionListener(this);
         calculatebill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
         master.add(calculatebill);
 
@@ -67,7 +75,7 @@ public class Project extends JFrame {
 
         JMenu info =new JMenu("Information");
         info.setForeground(Color.RED);
-        mb.add(info);
+
 
         JMenuItem updateinformation = new JMenuItem("Update Information");
         updateinformation.setFont(new Font("monospaced",Font.PLAIN,12));
@@ -76,6 +84,7 @@ public class Project extends JFrame {
         Image image5=Icon5.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         updateinformation.setIcon(new ImageIcon(image5));
         updateinformation.setMnemonic('P');
+        updateinformation.addActionListener(this);
         updateinformation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
         info.add(updateinformation);
 
@@ -86,12 +95,13 @@ public class Project extends JFrame {
         Image image6=Icon6.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         viewinformation.setIcon(new ImageIcon(image6));
         viewinformation.setMnemonic('B');
+        viewinformation.addActionListener(this);
         viewinformation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
         info.add(viewinformation);
 
         JMenu user =new JMenu("User");
         user.setForeground(Color.BLUE);
-        mb.add(user);
+
 
         JMenuItem paybill = new JMenuItem("Pay Bill");
         paybill.setFont(new Font("monospaced",Font.PLAIN,12));
@@ -100,6 +110,7 @@ public class Project extends JFrame {
         Image image7=Icon7.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         paybill.setIcon(new ImageIcon(image7));
         paybill.setMnemonic('R');
+        paybill.addActionListener(this);
         paybill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
         user.add(paybill);
 
@@ -110,12 +121,13 @@ public class Project extends JFrame {
         Image image8=Icon8.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         billdetails.setIcon(new ImageIcon(image8));
         billdetails.setMnemonic('B');
+        billdetails.addActionListener(this);
         billdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
         user.add(billdetails);
 
         JMenu report =new JMenu("Report");
         report.setForeground(Color.RED);
-        mb.add(report);
+
 
         JMenuItem generatebill = new JMenuItem("Generate Bill");
         generatebill.setFont(new Font("monospaced",Font.PLAIN,12));
@@ -124,13 +136,14 @@ public class Project extends JFrame {
         Image image9=Icon9.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         generatebill.setIcon(new ImageIcon(image9));
         generatebill.setMnemonic('G');
+        generatebill.addActionListener(this);
         generatebill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
         report.add(generatebill);
 
 
         JMenu utility =new JMenu("Utility");
         utility.setForeground(Color.BLUE);
-        mb.add(utility);
+
 
         JMenuItem notepad = new JMenuItem("Notepad");
         notepad.setFont(new Font("monospaced",Font.PLAIN,12));
@@ -139,13 +152,14 @@ public class Project extends JFrame {
         Image image10=Icon10.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         notepad.setIcon(new ImageIcon(image10));
         notepad.setMnemonic('N');
+        notepad.addActionListener(this);
         notepad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         utility.add(notepad);
 
 
         JMenu mexit =new JMenu("Exit");
         mexit.setForeground(Color.RED);
-        mb.add(mexit);
+
 
         JMenuItem exit = new JMenuItem("Exit");
         exit.setFont(new Font("monospaced",Font.PLAIN,12));
@@ -154,6 +168,7 @@ public class Project extends JFrame {
         Image image12=Icon12.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         exit.setIcon(new ImageIcon(image12));
         exit.setMnemonic('W');
+        exit.addActionListener(this);
         exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
         mexit.add(exit);
 
@@ -165,15 +180,62 @@ public class Project extends JFrame {
         Image image11=Icon11.getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT);
         calculator.setIcon(new ImageIcon(image11));
         calculator.setMnemonic('N');
+        calculator.addActionListener(this);
         calculator.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         utility.add(calculator);
 
+        if(atype.equals("Admin")) {
+            mb.add(master);
+        }else{
+            mb.add(info);
+            mb.add(user);
+            mb.add(report);
+        }
+        mb.add(mexit);
+        mb.add(utility);
 
         setLayout(new FlowLayout());
         setVisible(true);
     }
+    public void actionPerformed(ActionEvent ae) {
+        String msg = ae.getActionCommand();
+        if (msg.equals("New Customer")) {
+            new NewCustomer();
+        } else if (msg.equals("Customer Details")) {
+            new CustomerDetails();
+        } else if (msg.equals("Deposit Details")) {
+            new DepositDetails();
+        } else if (msg.equals("Calculate Bill")) {
+            new CalculateBill();
+        } else if (msg.equals("View Information")) {
+            new ViewInformation(meter);
+        } else if (msg.equals("Update Information")) {
+            new UpdateInformation(meter);
+        } else if (msg.equals("Bill Details")) {
+            new BillDetails(meter);
+        } else if (msg.equals("Notepad")) {
+            try {
+                Runtime.getRuntime().exec("notepad.exe");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (msg.equals("Calculator")) {
+            try {
+                Runtime.getRuntime().exec("calc.exe");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (msg.equals("Exit")) {
+            setVisible(false);
+            new Login();
+        } else if (msg.equals("Pay Bill")) {
+            new PayBill(meter);
+        } else if (msg.equals("Generate Bill")) {
+            new GenerateBill(meter);
+        }
+    }
 
     public static void main(String[] args) {
-        new Project();
+        new Project("","");
     }
 }
